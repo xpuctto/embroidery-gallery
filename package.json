@@ -12,6 +12,7 @@
         "parikral": "node ./tools/Makefile deploy2"
     },
     "devDependencies": {
+        "@websanova/vue-auth": "^2.21.14-beta",
         "axios": "^0.19",
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
@@ -25,6 +26,7 @@
         "shelljs": "^0.8.3",
         "ssh-deploy-release": "^2.3.4",
         "vue": "^2.5.17",
+        "vue-axios": "^2.1.4",
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {

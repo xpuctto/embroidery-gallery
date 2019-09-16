@@ -27,4 +27,15 @@ Route::get('/{vue_capture?}', function () {
     return view('welcome');
 })->where('vue_capture', '[\/\w\.-]*');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('admin/auth/register', 'AuthController@register');
+
+Route::post('admin/auth/login', 'AuthController@login');
+
+Route::group(['middleware' => 'jwt.auth'], function(){
+    Route::get('admin/auth/user', 'AuthController@user');
+    Route::post('admin/auth/logout', 'AuthController@logout');
+});
+
+Route::group(['middleware' => 'jwt.refresh'], function(){
+    Route::get('admin/auth/refresh', 'AuthController@refresh');
+});
