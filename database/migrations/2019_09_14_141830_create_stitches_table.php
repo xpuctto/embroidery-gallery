@@ -14,8 +14,7 @@ class CreateStitchesTable extends Migration
     public function up()
     {
         Schema::create('stitches', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedInteger('embroidery_id');
+            $table->increments('id');
             $table->string('name');
             $table->timestamps();
         });

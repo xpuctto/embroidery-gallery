@@ -19,7 +19,9 @@ Route::resources([
     'embroideries' => 'EmbroideryController',
     'symbols' => 'SymbolController',
     'regions' => 'RegionController',
-    'stitches' => 'StitchController'
+    'stitches' => 'StitchController',
+    'cities' => 'CityController',
+    'locations' => 'LocationController'
 ]);
 
 // Handle cases where a vue defined route is accessed directly via URL
@@ -39,3 +41,6 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 Route::group(['middleware' => 'jwt.refresh'], function(){
     Route::get('admin/auth/refresh', 'AuthController@refresh');
 });
+
+
+Route::get('/embroideries/search', 'EmbroideryController@search');

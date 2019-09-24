@@ -1,10 +1,19 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-4 text-center">Hi</div>
-            <div class="col-4 text-center">Hi</div>
-            <div class="col-4 text-center">Hi</div>
-        </div>
-        <router-link to="/admin">Admin</router-link>
+    <div>
+        <Header></Header>
+        <router-link></router-link>
+        <Footer></Footer>
     </div>
 </template>
+
+<script>
+    import Header from './common/Header';
+    import Footer from './common/Footer';
+
+    export default {
+        components: {
+            Header,
+            Footer
+        }
+    }
+</script>

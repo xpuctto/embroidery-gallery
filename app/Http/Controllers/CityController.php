@@ -35,7 +35,10 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regionId = $request->input('regionId');
+        $cityName = $request->input('cityName');
+
+        City::create(['region_id' => $regionId, 'name' => $cityName]);
     }
 
     /**
@@ -69,7 +72,10 @@ class CityController extends Controller
      */
     public function update(Request $request, City $city)
     {
-        //
+        $cityName = $request->input('cityName');
+
+        $city->name = $cityName;
+        $city->save();
     }
 
     /**
@@ -80,6 +86,6 @@ class CityController extends Controller
      */
     public function destroy(City $city)
     {
-        //
+        $city->delete();
     }
 }

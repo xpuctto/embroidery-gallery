@@ -31,6 +31,7 @@
     },
     "dependencies": {
         "bootstrap": "^4.3.1",
+        "element-ui": "^2.12.0",
         "ftp-deploy": "^2.3.3",
         "vue-router": "^3.1.3"
     }

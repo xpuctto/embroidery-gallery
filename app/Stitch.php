@@ -10,6 +10,6 @@ class Stitch extends Model
 
     public function embroidery()
     {
-        return $this->belongsTo(Embroidery::class);
+        return $this->belongsToMany(Embroidery::class, 'embroidery_stitch');
     }
 }

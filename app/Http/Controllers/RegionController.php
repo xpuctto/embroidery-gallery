@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Region;
+use App\City;
 use Illuminate\Http\Request;
 
 class RegionController extends Controller
@@ -14,7 +15,7 @@ class RegionController extends Controller
      */
     public function index()
     {
-        //
+        return Region::with('cities')->get();
     }
 
     /**
@@ -35,9 +36,12 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $regionName = $request->input('regionName');
 
+        Region::create(['name' => $regionName]);
+
+        return Region::all();
+    }
     /**
      * Display the specified resource.
      *
@@ -46,7 +50,14 @@ class RegionController extends Controller
      */
     public function show(Region $region)
     {
-        //
+        return $region::with('cities',
+            'embroideries',
+            'embroideries.stitches',
+            'embroideries.locations',
+            'embroideries.symbols',
+            'embroideries.city',
+            'embroideries.region',
+            'embroideries.embroidery_images')->first();
     }
 
     /**
@@ -69,7 +80,10 @@ class RegionController extends Controller
      */
     public function update(Request $request, Region $region)
     {
-        //
+        $regionName = $request->input('regionName');
+
+        $region->name = $regionName;
+        $region->save();
     }
 
     /**
@@ -80,6 +94,6 @@ class RegionController extends Controller
      */
     public function destroy(Region $region)
     {
-        //
+        $region->delete();
     }
 }

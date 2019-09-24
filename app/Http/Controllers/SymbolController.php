@@ -14,7 +14,7 @@ class SymbolController extends Controller
      */
     public function index()
     {
-        //
+        return Symbol::all();
     }
 
     /**
@@ -35,7 +35,11 @@ class SymbolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $symbolName = $request->input('symbolName');
+
+        Symbol::create(['name' => $symbolName]);
+
+        return Symbol::all();
     }
 
     /**
@@ -69,7 +73,10 @@ class SymbolController extends Controller
      */
     public function update(Request $request, Symbol $symbol)
     {
-        //
+        $symbolName = $request->input('symbolName');
+
+        $symbol->name = $symbolName;
+        $symbol->save();
     }
 
     /**
@@ -80,6 +87,6 @@ class SymbolController extends Controller
      */
     public function destroy(Symbol $symbol)
     {
-        //
+        $symbol->delete();
     }
 }

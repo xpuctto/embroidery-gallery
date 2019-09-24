@@ -1,15 +1,20 @@
 import './bootstrap';
 import vue from 'vue';
 import axios from 'axios';
-import vueAxios from 'vue-axios';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css'
+
+import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
 import VueAuth from '@websanova/vue-auth';
 
+import SearchEngine from './components/SearchEngine';
 import Home from './components/Home';
 import AdminPanel from './components/admin/Panel';
 import AdminDashboard from './components/admin/Dashboard';
 import Login from './components/admin/Login';
 import Register from './components/admin/Register';
+import Region from './components/Region';
 
 window.Vue = vue;
 
@@ -38,13 +43,22 @@ const routes = [
         path: '/admin/register',
         component: Register,
         name: 'register',
+    },
+    {
+        path: '/region/:regionId',
+        component: Region
+    },
+    {
+        path: '/search',
+        component: SearchEngine
     }
 ];
 
 const router = new VueRouter({ routes, history: true, mode: 'history' });
 
 Vue.use(VueRouter);
-Vue.use(vueAxios, axios);
+Vue.use(VueAxios, axios);
+Vue.use(ElementUI);
 
 Vue.router = router;
 

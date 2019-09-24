@@ -14,10 +14,8 @@ class CreateSymbolsTable extends Migration
     public function up()
     {
         Schema::create('symbols', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedInteger('embroidery_id');
+            $table->increments('id');
             $table->string('name');
-            $table->string('types');
             $table->timestamps();
         });
     }

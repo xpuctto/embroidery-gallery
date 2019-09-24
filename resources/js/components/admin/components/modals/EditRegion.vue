@@ -1,0 +1,71 @@
+<template>
+    <div>
+        <div class="modal fade" :id="modalId" tabindex="-1" role="dialog" aria-labelledby="editRegionModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form v-on:submit.prevent="editRegion">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editRegionModalLabel">
+                                {{ text.title }}
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" v-model.trim="regName" name="regionName" id="regionName" placeholder="Име на регион">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss="modal"> {{ text.buttons.close }}</button>
+                            <button type="submit" class="btn btn-primary"> {{ text.buttons.add }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import EventBus from '../../../helpers/eventBus';
+
+    export default {
+        data: function () {
+            return {
+                regName: this.regionName,
+                modalId: `editRegion-${this.regionId}`,
+                text: {
+                    title: 'Редактиране на регион',
+                    buttons: {
+                        close: 'Затвори',
+                        add: 'Запази'
+                    }
+                }
+            }
+        },
+        methods: {
+            async editRegion () {
+                const $editRegionModal = $(`#${this.modalId}`);
+                const csrfToken = $('meta[name="csrf-token"]').attr('content');
+                const regionName = this.regName;
+                const payload = { regionName };
+
+                await fetch(`/regions/${this.regionId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify(payload),
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                $editRegionModal.modal('hide');
+                EventBus.$emit('regions:update');
+            }
+        },
+        props: {
+            regionName: String,
+            regionId: Number
+        }
+    }
+</script>

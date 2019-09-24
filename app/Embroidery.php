@@ -10,12 +10,22 @@ class Embroidery extends Model
 
     public function stitches()
     {
-        return $this->hasMany(Stitch::class);
+        return $this->belongsToMany(Stitch::class, 'embroidery_stitch');
     }
 
     public function symbols()
     {
-        return $this->hasMany(Symbol::class);
+        return $this->belongsToMany(Symbol::class, 'embroidery_symbol');
+    }
+
+    public function locations()
+    {
+        return $this->belongsToMany(Location::class, 'embroidery_location');
+    }
+
+    public function embroidery_images()
+    {
+        return $this->hasMany(EmbroideryImage::class);
     }
 
     public function region()

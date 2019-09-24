@@ -14,7 +14,7 @@ class StitchController extends Controller
      */
     public function index()
     {
-        //
+        return Stitch::all();
     }
 
     /**
@@ -35,7 +35,9 @@ class StitchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $stitchName = $request->input('stitchName');
+
+        Stitch::create(['name' => $stitchName]);
     }
 
     /**
@@ -69,7 +71,10 @@ class StitchController extends Controller
      */
     public function update(Request $request, Stitch $stitch)
     {
-        //
+        $stitchName = $request->input('stitchName');
+
+        $stitch->name = $stitchName;
+        $stitch->save();
     }
 
     /**
@@ -80,6 +85,6 @@ class StitchController extends Controller
      */
     public function destroy(Stitch $stitch)
     {
-        //
+        $stitch->delete();
     }
 }
